@@ -5,6 +5,9 @@ package HW.homework6;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 class PhoneBook {
     private static HashMap<String, ArrayList<String>> phoneBook = new HashMap<>();
@@ -29,6 +32,20 @@ class PhoneBook {
     public static HashMap<String, ArrayList<String>> getPhoneBook() {
         return phoneBook;
     }
+
+    public void sort(){
+        TreeMap<Integer, String> tm = new TreeMap<>();
+        for (HashMap.Entry<String, ArrayList<String>> entry : phoneBook.entrySet()) {
+            String name = entry.getKey();
+            ArrayList<String> numbers = entry.getValue();
+            tm.put(numbers.size(), name);
+        }
+
+        TreeMap<Integer, String> tmDes = new TreeMap<>(tm.reversed());
+        for (String name : tmDes.values()){
+            System.out.println(name + "=" + phoneBook.get(name));
+        }
+    }
 }
 
 public class program {
@@ -48,5 +65,7 @@ public class program {
         System.out.println("Поиск по имени Шарова Майя: " + phoneBook.find("Шарова Майя"));
         System.out.println("Вся телефонная книга: " + PhoneBook.getPhoneBook());
         System.out.println("Поиск по несуществующему имени: " + phoneBook.find(""));
+        System.out.println("Вся телефонная книга (отсортирована по убыванию количества телефонов):");
+        phoneBook.sort();
     }
 }
