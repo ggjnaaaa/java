@@ -2,7 +2,7 @@ package hw.hw1.clients;
 
 import java.time.LocalDate;
 
-public class Animal {
+public abstract class Animal {
     // protected видно в классе и во всех наследниках
     protected String nickName;
     protected Owner owner;
@@ -48,22 +48,6 @@ public class Animal {
         sleep();
     }
 
-    public void toGo(){
-        System.out.println("Животное идёт.");
-    }
-
-    public void fly(){
-        System.out.println("Животное летит.");
-    }
-
-    public void swim(){
-        System.out.println("Животное плывёт.");
-    }
-
-    private void wakeUp() {
-        wakeUp("12:00");
-    }
-
     private void wakeUp(String time) {
         System.out.println("Животное " + nickName + " проснулось в " + time);
     }
@@ -84,6 +68,6 @@ public class Animal {
 
     @Override
     public String toString() {
-        return String.format("nickName = %s, bd = %s, owner = %s, illness = %s", nickName, birthDate, owner, illness);
+        return String.format("Имя = %s \nДень рождения = %s \nХозяин = %s \nЗаболевание = %s \n", nickName, birthDate, owner, illness);
     }
 }

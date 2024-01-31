@@ -1,9 +1,10 @@
-package hw.hw1.clients.Animals;
+package hw.hw1.clients.animals;
 
 import java.time.LocalDate;
 import hw.hw1.clients.*;
+import hw.hw1.clients.actions.*;
 
-public class Cat extends Animal {
+public class Cat extends Animal implements Goable, Swimable {
     //Todo напомнить в чём разница в double
     Double discount;
 
@@ -32,9 +33,16 @@ public class Cat extends Animal {
 
     @Override
     public String toString() {
-        return super.toString() + ", Discount: " + discount;
+        return super.toString() + "Discount: " + discount + "\n";
     }
 
     @Override
-    public void fly() { }
+    public double getRunSpeed() {
+        return 10.0;
+    }
+
+    @Override
+    public double getSwimSpeed() {
+        return 5.0;
+    }
 }

@@ -1,12 +1,13 @@
 package hw.hw1;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import hw.hw1.clients.Animal;
-import hw.hw1.clients.Illness;
-import hw.hw1.clients.Owner;
-import hw.hw1.clients.Animals.*;
+import hw.hw1.clients.*;
+import hw.hw1.clients.animals.*;
+import hw.hw1.workers.Doctor;
+import hw.hw1.workers.Nurse;
+import hw.hw1.workers.Worker;
 
 /**
  * program
@@ -14,31 +15,40 @@ import hw.hw1.clients.Animals.*;
 public class program {
     public static void main(String[] args) {
 
-        ArrayList<Animal> animals = new ArrayList<>();
+        VeterinaryClinic vetClin = new VeterinaryClinic();
+        Generate gen = new Generate();
 
-        Cat cat = new Cat("кот", new Owner("хозяин"), LocalDate.now(), new Illness("болезнь"), 10D);
-        animals.add(cat);
+        ArrayList<Worker> workers = gen.generateWorkers(3, 2, 2);
+        ArrayList<Animal> animals = gen.generateAnimals(1, 2, 2, 1, 2);
 
-        Dog dog = new Dog("собака", new Owner("хозяин"), LocalDate.now(), new Illness("болезнь"));
-        animals.add(dog);
+        //#region лечение всех животных
+        System.out.println("---------------------------------- \nЖивотные: \n");
+        for (Animal animal : animals) System.out.println(animal);
+        System.out.println("---------------------------------- \nРаботники: \n");
+        for (Worker worker : workers) System.out.println(worker);
 
-        Duck duck = new Duck("утка", new Owner("хозяин"), LocalDate.now(), new Illness("болезнь"));
-        animals.add(duck);
+        ArrayList<Doctor> doctors = vetClin.getDoctors(workers);
+        ArrayList<Nurse> nurses = vetClin.getNurses(workers);
 
-        Penguin penguin = new Penguin("пингвин", new Owner("хозяин"), LocalDate.now(), new Illness("болезнь"));
-        animals.add(penguin);
+        System.out.println("---------------------------------- \nЖивотные: \n");
+        for (Animal animal : vetClin.goWork(doctors, nurses, animals)) System.out.println(animal);
+        //#endregion
 
+        //#region вывод всех бегающих, всех плавающих и всех летающих
+        System.out.println("---------------------------------- \nВсе бегающие: \n");
+        for (Animal animal : vetClin.getGoAnimals(animals)) System.out.println(animal);
 
-        for (Animal animal : animals) {
-            System.out.println(String.format("Животное: %s ", animal));
+        System.out.println("---------------------------------- \nВсе плавающие: \n");
+        for (Animal animal : vetClin.getSwimAnimals(animals)) System.out.println(animal);
 
-            System.out.println("Ходит: ");
-            animal.toGo();
-            System.out.println("Плавает: ");
-            animal.swim();
-            System.out.println("Летает: ");
-            animal.fly();
-            System.out.println("-------------------------- \n");
+        System.out.println("---------------------------------- \nВсе летающие: \n");
+        for (Animal animal : vetClin.getFlyAnimals(animals)) System.out.println(animal);
+        //#endregion
+
+        Animal an = vetClin.getGoAnimals(animals).get(0);
+        if (an instanceof Cat) {
+            System.out.println(((Cat)an).swim());
+            System.out.println(((Cat)an).run());
         }
     }
 }
