@@ -1,6 +1,7 @@
 package hw.hw1.clients;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public abstract class Animal {
     // protected видно в классе и во всех наследниках
@@ -8,6 +9,7 @@ public abstract class Animal {
     protected Owner owner;
     protected LocalDate birthDate;
     protected Illness illness;
+    private String ID;
 
     // Это пустой конструктор (по умолчанию)
     public Animal(String nickName, Owner owner, LocalDate birthDate, Illness illness) {
@@ -15,6 +17,7 @@ public abstract class Animal {
         this.owner = owner;
         this.birthDate = birthDate;
         this.illness = illness;
+        this.ID = UUID.randomUUID().toString();
     }
 
     public Animal() {
@@ -39,6 +42,10 @@ public abstract class Animal {
 
     public void setIllness(Illness illness) {
         this.illness = illness;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public void lifeCycle() {

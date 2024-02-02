@@ -7,12 +7,63 @@ import hw.hw1.clients.actions.*;
 import hw.hw1.workers.*;
 
 public class VeterinaryClinic {
+
+    private ArrayList<Worker> workers;
+    private ArrayList<Animal> animals;
+
+    public VeterinaryClinic() {
+        workers = new ArrayList<>();
+        animals = new ArrayList<>();
+    }
+
+    public ArrayList<Animal> getAnimals() {
+        return animals;
+    }
+
+    public ArrayList<Worker> getWorkers() {
+        return workers;
+    }
+
+    public void addAnimals(ArrayList<Animal> animals) {
+        this.animals.addAll(animals);
+    }
+
+    public void addWorkers(ArrayList<Worker> workers) {
+        this.workers.addAll(workers);
+    }
+
+    public void addAnimal(Animal animals) {
+        this.animals.add(animals);
+    }
+
+    public void addWorker(Worker workers) {
+        this.workers.add(workers);
+    }
+
+    public void deleteAnimal(String ID) {
+        for (int i = 0; i < animals.size(); i++)
+            if (animals.get(i).getID() == ID)
+            {
+                animals.remove(i);
+                return;
+            }
+    }
+
+    public void deleteWorker(String ID) {
+        for (int i = 0; i < workers.size(); i++)
+            if (workers.get(i).getID() == ID)
+            {
+                workers.remove(i);
+                return;
+            }
+    }
+
     /*
      * Методы получения:
      * ходящих/летающих/плавающих животных из списка животных
      * врачей/медсестёр/уборщиков из списка рабочих
      */
-    public ArrayList<Animal> getGoAnimals(ArrayList<Animal> animals) {
+    public ArrayList<Animal> getGoAnimals() {
         ArrayList<Animal> goAnimals = new ArrayList<>();
 
         for (int i = 0; i < animals.size(); i++)
@@ -22,7 +73,7 @@ public class VeterinaryClinic {
         return goAnimals;
     }
 
-    public ArrayList<Animal> getFlyAnimals(ArrayList<Animal> animals) {
+    public ArrayList<Animal> getFlyAnimals() {
         ArrayList<Animal> flyAnimals = new ArrayList<>();
 
         for (int i = 0; i < animals.size(); i++)
@@ -32,7 +83,7 @@ public class VeterinaryClinic {
         return flyAnimals;
     }
 
-    public ArrayList<Animal> getSwimAnimals(ArrayList<Animal> animals) {
+    public ArrayList<Animal> getSwimAnimals() {
         ArrayList<Animal> swimAnimals = new ArrayList<>();
 
         for (int i = 0; i < animals.size(); i++)
@@ -42,7 +93,7 @@ public class VeterinaryClinic {
         return swimAnimals;
     }
 
-    public ArrayList<Doctor> getDoctors(ArrayList<Worker> workers) {
+    public ArrayList<Doctor> getDoctors() {
         ArrayList<Doctor> doctors = new ArrayList<>();
 
         for (int i = 0; i < workers.size(); i++)
@@ -52,7 +103,7 @@ public class VeterinaryClinic {
         return doctors;
     }
 
-    public ArrayList<Nurse> getNurses(ArrayList<Worker> workers) {
+    public ArrayList<Nurse> getNurses() {
         ArrayList<Nurse> nurses = new ArrayList<>();
 
         for (int i = 0; i < workers.size(); i++)
@@ -62,7 +113,7 @@ public class VeterinaryClinic {
         return nurses;
     }
 
-    public ArrayList<Cleaner> getCleaners(ArrayList<Worker> workers) {
+    public ArrayList<Cleaner> getCleaners() {
         ArrayList<Cleaner> cleaner = new ArrayList<>();
 
         for (int i = 0; i < workers.size(); i++)
@@ -77,12 +128,12 @@ public class VeterinaryClinic {
      * Доктор может лечить без медсестры
      * Возвращается список животных с поставленным диагнозом
      */
-    public ArrayList<Animal> goWork(ArrayList<Doctor> doctors, ArrayList<Nurse> nurses, ArrayList<Animal> animals) {
-        ArrayList<Animal> animalsWithoutDiagnosis = getAnimalsWithoutDiagnosis(animals);
+    public ArrayList<Animal> goWork(ArrayList<Doctor> doctors, ArrayList<Nurse> nurses) {
+        ArrayList<Animal> animalsWithoutDiagnosis = getAnimalsWithoutDiagnosis();
         ArrayList<Animal> result = new ArrayList<>();
 
-        while (getAnimalsWithoutDiagnosis(animalsWithoutDiagnosis).size() != 0) {
-            animalsWithoutDiagnosis = getAnimalsWithoutDiagnosis(animalsWithoutDiagnosis);
+        while (getAnimalsWithoutDiagnosis().size() != 0) {
+            animalsWithoutDiagnosis = getAnimalsWithoutDiagnosis();
             for (int i = 0; i < animalsWithoutDiagnosis.size(); i++) {
                 Doctor doc = getFreeDoctor(doctors);
                 Nurse nurse = getFreeNurse(nurses);
@@ -98,7 +149,7 @@ public class VeterinaryClinic {
     /*
      * Этот метод возвращает список животных без диагноза
      */
-    private ArrayList<Animal> getAnimalsWithoutDiagnosis(ArrayList<Animal> animals) {
+    private ArrayList<Animal> getAnimalsWithoutDiagnosis() {
         ArrayList<Animal> animalsWithoutDiagnosis = new ArrayList<>();
 
         for (int i = 0; i < animals.size(); i++)
