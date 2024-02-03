@@ -8,7 +8,7 @@ import hw.hw1_3.clients.Illness;
 /**
  * Doctor
  */
-public class Doctor extends Nurse {
+public class Doctor extends BasicMedicalWorker {
     public Nurse nurse;
     public Animal animal;
 

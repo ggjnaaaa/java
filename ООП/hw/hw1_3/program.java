@@ -12,13 +12,7 @@ import hw.hw1_3.workers.*;
  */
 public class program {
     public static void main(String[] args) {
-
-        Doctor doc1 = new Doctor("Doc1", "Doc1", "bvu");
-        Doctor doc2 = new Doctor("Doc2", "Doc2", "bvu");
-        doc1.workingWithDoctor(doc2);
-        doc1.stopWorkingWithDoctor();
-
-        /*VeterinaryClinic vetClin = new VeterinaryClinic();
+        VeterinaryClinic vetClin = new VeterinaryClinic();
         Generate gen = new Generate();
 
         vetClin.addWorkers(gen.generateWorkers(3, 2, 2));
@@ -52,6 +46,6 @@ public class program {
         if (an instanceof Cat) {
             System.out.println(((Cat)an).swim());
             System.out.println(((Cat)an).run());
-        }*/
+        }
     }
 }
