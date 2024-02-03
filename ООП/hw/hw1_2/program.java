@@ -1,19 +1,23 @@
-package hw.hw1;
+package hw.hw1_2;
 
 import java.util.ArrayList;
 
-import hw.hw1.clients.Animal;
-import hw.hw1.clients.animals.*;
-import hw.hw1.workers.Doctor;
-import hw.hw1.workers.Nurse;
-import hw.hw1.workers.Worker;
+import hw.hw1_2.clients.Animal;
+import hw.hw1_2.clients.animals.*;
+import hw.hw1_2.workers.*;
+
 
 /**
  * program
  */
 public class program {
     public static void main(String[] args) {
-        VeterinaryClinic vetClin = new VeterinaryClinic();
+
+        Doctor doc1 = new Doctor("Doc1", "Doc1", "bvu");
+        Doctor doc2 = new Doctor("Doc2", "Doc2", "bvu");
+        doc1.workingWithDoctor(doc2);
+        doc1.stopWorkingWithDoctor();
+        /*VeterinaryClinic vetClin = new VeterinaryClinic();
         Generate gen = new Generate();
 
         vetClin.addWorkers(gen.generateWorkers(3, 2, 2));
@@ -47,6 +51,6 @@ public class program {
         if (an instanceof Cat) {
             System.out.println(((Cat)an).swim());
             System.out.println(((Cat)an).run());
-        }
+        }*/
     }
 }
