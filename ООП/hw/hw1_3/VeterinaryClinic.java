@@ -107,7 +107,7 @@ public class VeterinaryClinic {
         ArrayList<Nurse> nurses = new ArrayList<>();
 
         for (int i = 0; i < workers.size(); i++)
-            if (workers.get(i) instanceof Nurse && !(workers.get(i) instanceof Doctor))
+            if (workers.get(i) instanceof Nurse)
                 nurses.add((Nurse)workers.get(i));
 
         return nurses;
