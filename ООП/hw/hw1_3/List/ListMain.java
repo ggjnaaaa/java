@@ -1,5 +1,7 @@
 package hw.hw1_3.List;
 
+import java.util.Iterator;
+
 import hw.hw1_3.List.core.MyList;
 import hw.hw1_3.List.core.lists.*;
 
@@ -37,8 +39,10 @@ public class ListMain {
         mList.set(0, 20);
         System.out.println(mList);
 
-        while (mList.iterator().hasNext()) {
-            System.out.println(mList.iterator().next());
+        System.out.println("\nИтератор:");
+        Iterator<Integer> iter = mList.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
         }
     }
 }
