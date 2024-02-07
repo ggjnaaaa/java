@@ -7,6 +7,7 @@ import hw.hw1_3.List.core.util.LinkedIterator;
 
 public class MyLinkedList<T> implements MyList<T> {
     private Node<T> head;
+    private int size;
 
     @Override
     public Iterator<T> iterator() {
@@ -17,17 +18,19 @@ public class MyLinkedList<T> implements MyList<T> {
     public void add(T elem) {
         if (head == null) {  // Если нет первого элемента
             head = new Node<T>(elem, null);
+            size++;
             return;
         }
 
         Node<T> current = head;
         while (current.next != null) current = current.next;  // Поиск последнего элемента
         current.next = new Node<T>(elem, current);
+        size++;
     }
 
     @Override
     public void remove(int index) {
-        if (index >= size() || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
+        if (index >= size || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
         int currentIndex = 0;
         Node<T> currentNode = head;
         while (currentIndex < index && currentNode != null) {  // Поиск элемента с нужным индексом
@@ -44,11 +47,13 @@ public class MyLinkedList<T> implements MyList<T> {
             currentNode.next.prev = currentNode.prev;
             currentNode.prev.next = currentNode.next;
         }
+
+        size--;
     }
 
     @Override
     public T get(int index) {
-        if (index >= size() || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
+        if (index >= size || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
         int currentIndex = 0;
         Node<T> currentNode = head;
         while (currentIndex < index) {  // Поиск элемента с нужным индексом
@@ -61,18 +66,11 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public int size() {
-        int size = 0;
-        Node<T> currentNode = head;
-        while (currentNode != null) {  // Поиск последнего элемента
-            size++;
-            currentNode = currentNode.next;
-        }
         return size;
     }
 
     @Override
     public int indexOf(T object) {
-        int size = size();
         if (size == 0 ) return -1;  // Если элементов нет вернёт -1
 
         int currentIndex = 0;
@@ -89,7 +87,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void set(int index, T object) {
-        if (index >= size() || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
+        if (index >= size || index < 0) throw new IndexOutOfBoundsException();  // Индекс вне границ массива
         int currentIndex = 0;
         Node<T> currentNode = head;
         while (currentIndex < index) {  // Поиск элемента с нужным индексом
